@@ -54,7 +54,7 @@ for (i in (1..2)) {
         }
 
         steps {
-            shell('java -jar *.jar > output.txt; tar -czf ${BRANCH_NAME}_dsl_script.tar.gz jobs.groovy')
+            shell('java -jar *.jar > groovy.txt; tar -czf ${BRANCH_NAME}_dsl_script.tar.gz groovy.txt')
         }
         publishers {
             archiveArtifacts {
