@@ -38,7 +38,7 @@ for (i in (1..2)) {
                 remote {
                     url(giturl)
                 }
-                branch('$BRANCH_NAME')
+                branch('Additional_task')
             }
         }
 
