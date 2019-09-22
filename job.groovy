@@ -55,7 +55,7 @@ for (i in (1..4)) {
         steps {
             shell('''
    bash script.sh > output.txt
-   tar -czf ${BRANCH_NAME}_dsl_script.tar.gz jobs.groovy''')
+   tar -czf ${BRANCH_NAME}_dsl_script.tar.gz job.groovy''')
         }
         publishers {
             archiveArtifacts {
