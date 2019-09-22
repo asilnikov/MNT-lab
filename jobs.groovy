@@ -1,22 +1,22 @@
 def giturl = 'https://github.com/asilnikov/MNT-lab.git'
-job ("MNTLAB-silnikov-main_Additional-build-job") {
+job ("MNTLAB-Additional_task-main_Additional-build-job") {
 
     parameters{
-        choiceParam('BRANCH_NAME', ['asilnikov', 'master'], 'Branch name')
-        activeChoiceParam('Next_job') {
+        choiceParam('BRANCH_NAME', ['Additional_task', 'master'], 'Branch name')
+        activeChoiceParam('steps_job') {
             description('Choose job')
             choiceType('CHECKBOX')
             filterable(false)
             groovyScript {
-                script('''return ["MNTLAB-asilnikov-Additional2-build-job", 
-                                  "MNTLAB-asilnikov-Additional1-build-job"]''')
+                script('''return ["MNTLAB-Additional_task-Additional2-build-job", 
+                                  "MNTLAB-Additional_task-Additional1-build-job"]''')
             }
         }
     }
 
     steps {
         downstreamParameterized {
-            trigger('$Next_job') {
+            trigger('$steps_job') {
                 block {
                     buildStepFailure('FAILURE')
                     failure('FAILURE')
@@ -31,7 +31,7 @@ job ("MNTLAB-silnikov-main_Additional-build-job") {
 }
 
 for (i in (1..2)) {
-    job("MNTLAB-asilnikov-Additional${i}-build-job") {
+    job("MNTLAB-Additional_task-Additional${i}-build-job") {
 
         scm {
             git {
@@ -54,11 +54,11 @@ for (i in (1..2)) {
         }
 
         steps {
-            shell('java -jar *.jar > groovy.txt; tar -czf ${BRANCH_NAME}_dsl_script.tar.gz groovy.txt')
+            shell('java -jar *.jar > Additional_task.txt; tar -czf ${BRANCH_NAME}_Additional_task.tar.gz Additional_task.txt')
         }
         publishers {
             archiveArtifacts {
-                pattern('${BRANCH_NAME}_dsl_script.tar.gz')
+                pattern('${BRANCH_NAME}_Additional_task.tar.gz')
                 allowEmpty(false)
                 onlyIfSuccessful(false)
                 fingerprint(false)
